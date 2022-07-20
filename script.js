@@ -35,7 +35,7 @@ function printValue() {
 
   msg.innerHTML = 'Yes';
   msg.classList.remove('hidden');
-  console.log(hours + ':' + minutes + ":" + seconds);
+  msg.textContent = `${hours}:${minutes}:${seconds}`;
 }
 
 function checkHourInputs() {
