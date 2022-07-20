@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+.hidden {
+    display: none;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    background-image: linear-gradient(to bottom right, rgba(87, 87, 252, 0.25), rgba(0, 0, 79, 0.25));
+    background-size: cover;
+    background-attachment: fixed;
+    font-size: 18px;
+    margin: 0;
+}
+
+.modal{
+    width: 100%;
+    background-image: linear-gradient(to bottom, rgb(78, 78, 78), rgb(189, 189, 189));
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#previousTime {
+    padding: 1rem;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 0.5em;
+    font-family: 'Roboto Mono', monospace;
+    color: rgb(201, 201, 201);
+    background-color: rgb(9, 0, 53);
+    padding-bottom: 0.5em;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.timeInputBox {
+    width: 25px;
+}
+
+#messageBox {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    color: white;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 400;
+    background: red;
+    padding: 0;
+}
+
+.recentRace {
+    text-align: center;
+}
+
+.buttonStyle {
+    cursor: pointer;
+    background-color: rgb(0, 0, 79);
+    color: white;
+    font-family: inherit;
+    font-size: 1.25rem;
+    border: 0;
+    margin-top: 1em;
+}
+
+@media screen and (min-width: 478px) {
+    .modal{
+        width: 400px;
+        border-radius: 15px;
+        filter: drop-shadow(5px 5px 10px rgba(0, 0, 0, 0.422));
+    }
+
+    h1 {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    body {
+        font-size: 18px;
+    }
+    
+    .modal{
+        width: 600px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .modal{
+        width: 800px;
+    }
+}

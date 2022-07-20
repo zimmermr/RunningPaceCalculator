@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="recentRace modal">
+      <h1>Training Pace Calculator</h1>
+      <form id="previousTime">
+        <div id="prevRaceDistDiv">
+          <label for="prevRaceDist">Which race distance have you recently completed?</label>
+          <div id="prevRaceDropdown">
+            <select id="prevRaceDist">
+              <option value="5000">5K</option>
+              <option value="10000">10K</option>
+              <option value="half">Half Marathon</option>
+              <option value="marathon">Marathon</option>
+            </select>
+          </div>
+        </div>
+        <div class="inputGroup">
+          <label>What was your finish time?</label>
+          <div id="finishTimeInput">
+            <input type="number" maxlength="2" id="prevRaceTimeHH" class="timeInputBox" placeholder="HH"/>:
+            <input type="number" maxlength="2" id="prevRaceTimeMM" class="timeInputBox" placeholder="MM"/>:
+            <input type="number" maxlength="2" id="prevRaceTimeSS" class="timeInputBox" placeholder="SS"/>
+          </div>
+        </div>
+        <div class="btn" id="btnCalc">
+          <button class="buttonStyle" type="button">Calculate</button>
+        </div>
+        <div class="btn" id="btnReset">
+          <button class="buttonStyle" type="button">Reset form</button>
+        </div>
+      </form>
+      <div id="messageBox" class="hidden"></div>
+    </div>
+  </body>
+  <script src="script.js"></script>
+</html>
