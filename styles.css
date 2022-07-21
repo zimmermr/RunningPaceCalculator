@@ -84,10 +84,30 @@ h1 {
 }
 
 .dropdown option {
-    font-size: 1rem;
+    font-size: 1.25rem;
     margin: 10px;
     width: 200px;
     font-weight: 800;
+}
+
+#finishTimeInput {
+    padding: 10px 0;
+}
+
+#finishTimeInput input {
+    font-size: 1rem;
+    padding: 10px;
+    font-family: inherit;
+    background-color: var(--darkerblue) !important;
+    color: white;
+    border: 0;
+    text-align: center;
+}
+
+#finishTimeInput input:focus {
+    background-color: lightblue !important;
+    color: black !important;
+    border: 0 !important;
 }
 
 @media screen and (min-width: 478px) {

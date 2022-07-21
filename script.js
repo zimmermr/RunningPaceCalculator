@@ -6,46 +6,48 @@ const btnCalc = document.getElementById('btnCalc');
 const btnReset = document.getElementById('btnReset');
 const fullForm = document.getElementById('previousTime');
 
-let hours;
-let minutes;
-let seconds;
+let hours = hh.value;
+let minutes = mm.value;
+let seconds = ss.value;
+let timeInSeconds = 0;
 
 btnCalc.addEventListener('click', calculate);
 btnReset.addEventListener('click', clear);
 
 function calculate() {
-  printValue();
-}
-
-function clear() {
-  clearMessage();
-  fullForm.reset();
-}
-
-function printValue() {
-  hours = hh.value > 0 ? hh.value : '00';
-
-  if (mm.value > 10) minutes = mm.value;
-  else if (mm.value > 0) minutes = '0' + mm.value;
-  else if (mm.value === 0 || mm.value === '') minutes = '00';
-
-  if (ss.value > 10) seconds = ss.value;
-  else if (ss.value > 0) seconds = '0' + ss.value;
-  else if (ss.value === 0 || ss.value === '') seconds = '00';
-
-  msg.innerHTML = 'Yes';
-  msg.classList.remove('hidden');
-  msg.textContent = `${hours}:${minutes}:${seconds}`;
-}
-
-function checkHourInputs() {
-  if (hh.value < 0) {
-    changeMessage(`${hh.value} hours? Please show me your time machine!`)
-  } else if (hh.value > 23) {
-    changeMessage(`${hh.value} hours? I can't compute races that take longer than a day.`)
-  } else if (hh.value === 0 || (hh.value >= 0 && hh.value < 24)) {
-    clearMessage();
+  if (checkTimeInputs()) {
+    convertToSeconds();
+    msg.textContent = '';
+    addMessage(`Your time in seconds is ${timeInSeconds}`);
   }
+}
+
+function checkTimeInputs() {
+  if (hh.value < 0) {
+    addMessage(`${hh.value} hours? Please show me your time machine!\n`)
+  }
+
+  if (hh.value > 23) {
+    addMessage(`${hh.value} hours? I can't compute races that take longer than a day.`)
+  }
+
+  if (mm.value > 59 || mm.value < 0) {
+    addMessage(`${mm.value} minutes? That ain't right. Enter a number from 0 to 59.`)
+  }
+
+  if (ss.value > 59 || ss.value < 0) {
+    addMessage(`${ss.value} seconds? Impossible! Enter a number from 0 to 59.`)
+  }
+
+  if (hh.value > 0 && hh.value < 25 && mm.value < 60 && mm.value > 0 && ss.value > 0 && ss.value < 60) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function convertToSeconds() {
+  timeInSeconds = (hours * 3600) + (minutes * 60) + seconds;
 }
 
 function addMessage(message) {
@@ -56,4 +58,9 @@ function addMessage(message) {
 function clearMessage() {
   msg.textContent = '';
   msg.classList.add('hidden');
+}
+
+function clear() {
+  clearMessage();
+  fullForm.reset();
 }
