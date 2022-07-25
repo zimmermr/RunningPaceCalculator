@@ -22,7 +22,7 @@
         <div class="inputGroup">
           <label>What was your finish time?</label>
           <div id="finishTimeInput">
-            <input type="number" maxlength="2" id="prevRaceTimeHH" class="timeInputBox" placeholder="HH"/>:<input type="number" maxlength="2" id="prevRaceTimeMM" class="timeInputBox" placeholder="MM"/>:<input type="number" maxlength="2" id="prevRaceTimeSS" class="timeInputBox" placeholder="SS"/>
+            <input type="number" maxlength="2" id="prevRaceTimeHH" class="timeInputBox" placeholder="HH" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>:<input type="number" maxlength="2" id="prevRaceTimeMM" class="timeInputBox" placeholder="MM" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>:<input type="number" maxlength="2" id="prevRaceTimeSS" class="timeInputBox" placeholder="SS" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
           </div>
         </div>
         <div class="btn" id="btnCalc">
