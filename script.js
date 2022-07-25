@@ -5,7 +5,8 @@ const msg = document.getElementById('messageBox');
 const btnCalc = document.getElementById('btnCalc');
 const btnReset = document.getElementById('btnReset');
 const btnReturn = document.getElementById('btnHidePace');
-const paceModalElement = document.getElementById('paceModal');
+const paceBoxElement = document.querySelector('.paceBox');
+const recentRaceBoxElement = document.querySelector('.recentRace');
 const fullForm = document.getElementById('previousTime');
 const raceDist = document.getElementById('prevRaceDist');
 const easyPaceElement = document.getElementById('easyPace');
@@ -14,6 +15,7 @@ const halfPaceElement = document.getElementById('halfMarathonPace');
 const tempoPaceElement = document.getElementById('tempoPace');
 const longIntPaceElement = document.getElementById('longIntPace');
 const shortIntPaceElement = document.getElementById('shortIntPace');
+const footerContent = document.getElementById('footerContent');
 
 let timeInSeconds = 0;
 let hours, minutes, seconds, vMax;
@@ -25,46 +27,59 @@ btnCalc.addEventListener('click', calculate);
 btnReset.addEventListener('click', clear);
 btnReturn.addEventListener('click', closePaces)
 
+window.onload = function () {
+  setFooter();
+};
+
+function setFooter() {
+  footerContent.innerHTML = `©${new Date().getFullYear()} Glimmer Man Media`;
+}
+
 function calculate() {
   getNumbersFromInputs();
   if (checkTimeInputs()) {
-    console.log(easyPaceElement);
     convertToSeconds(hours, minutes, seconds);
     vMax = getvo2Max(timeInSeconds);
     setPaces();
-    easyPaceElement.innerHTML = `Easy/Long Run Pace:<br />${convertToTimeFormat(easyPaceFast)}-${convertToTimeFormat(easyPaceSlow)} min/mile`;
-    marathonPaceElement.innerHTML = `Marathon Pace:<br />${convertToTimeFormat(marPaceFast)}-${convertToTimeFormat(marPaceSlow)} min/mile`;
-    halfPaceElement.innerHTML = `Half Marathon Pace:<br />${convertToTimeFormat(halfPaceFast)}-${convertToTimeFormat(halfPaceSlow)} min/mile`;
-    tempoPaceElement.innerHTML = `Tempo Run Pace:<br />${convertToTimeFormat(tempoPaceFast)}-${convertToTimeFormat(tempoPaceSlow)} min/mile`;
-    longIntPaceElement.innerHTML = `Long Interval (800m+) Pace:<br />${convertToTimeFormat(longIntPaceFast)}-${convertToTimeFormat(longIntPaceSlow)} min/mile`;
-    shortIntPaceElement.innerHTML = `Short Interval (<800m) Pace:<br />${convertToTimeFormat(shortIntPaceFast)}-${convertToTimeFormat(shortIntPaceSlow)} min/mile`;
+    easyPaceElement.innerHTML = `Easy/Long Run:<br />${convertToTimeFormat(easyPaceFast)}-${convertToTimeFormat(easyPaceSlow)} min/mile`;
+    marathonPaceElement.innerHTML = `Marathon:<br />${convertToTimeFormat(marPaceFast)}-${convertToTimeFormat(marPaceSlow)} min/mile`;
+    halfPaceElement.innerHTML = `Half Marathon:<br />${convertToTimeFormat(halfPaceFast)}-${convertToTimeFormat(halfPaceSlow)} min/mile`;
+    tempoPaceElement.innerHTML = `Tempo:<br />${convertToTimeFormat(tempoPaceFast)}-${convertToTimeFormat(tempoPaceSlow)} min/mile`;
+    longIntPaceElement.innerHTML = `Long Interval (800m+):<br />${convertToTimeFormat(longIntPaceFast)}-${convertToTimeFormat(longIntPaceSlow)} min/mile`;
+    shortIntPaceElement.innerHTML = `Short Interval (<800m):<br />${convertToTimeFormat(shortIntPaceFast)}-${convertToTimeFormat(shortIntPaceSlow)} min/mile`;
 
-    paceModalElement.classList.remove('hidden');
+    paceBoxElement.classList.remove('hidden');
+    recentRaceBoxElement.classList.add('hidden');
   }
 }
 
 function checkTimeInputs() {
-  let validNumbers = hours > 0 && hours < 25 && minutes < 60 && minutes > 0 && seconds > 0 && seconds < 60;
-  if (validNumbers || !hh.value) {
-    return true;
-  } else {
+  if (hours === 0 && minutes === 0 && seconds === 0) {
     clearMessage();
-    if (hours < 0) {
-      addMessage(`${hours} hours? Please show me your time machine!\n`)
-    }
+    addMessage(`You must enter a time`);
+  } else {
+    let validNumbers = hours > 0 && hours < 25 && minutes < 60 && minutes > 0 && seconds > 0 && seconds < 60;
+    if (validNumbers || !hh.value) {
+      return true;
+    } else {
+      clearMessage();
+      if (hours < 0) {
+        addMessage(`${hours} hours? Please show me your time machine!\n`)
+      }
 
-    if (hours > 23) {
-      addMessage(`${hours} hours? I can't compute races that take longer than a day.`)
-    }
+      if (hours > 23) {
+        addMessage(`${hours} hours? I can't compute races that take longer than a day.`)
+      }
 
-    if (minutes > 59 || minutes < 0) {
-      addMessage(`${minutes} minutes? That ain't right. Enter a number from 0 to 59.`)
-    }
+      if (minutes > 59 || minutes < 0) {
+        addMessage(`${minutes} minutes? That ain't right. Enter a number from 0 to 59.`)
+      }
 
-    if (seconds > 59 || seconds < 0) {
-      addMessage(`${seconds} seconds? Impossible! Enter a number from 0 to 59.`)
+      if (seconds > 59 || seconds < 0) {
+        addMessage(`${seconds} seconds? Impossible! Enter a number from 0 to 59.`)
+      }
+      return false;
     }
-    return false;
   }
 }
 
@@ -172,7 +187,8 @@ function getPaceFromVo2(vo2) {
 }
 
 function closePaces() {
-  paceModalElement.classList.add('hidden');
+  paceBoxElement.classList.add('hidden');
+  recentRaceBoxElement.classList.remove('hidden');
 }
 
 function addMessage(message) {

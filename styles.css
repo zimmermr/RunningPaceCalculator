@@ -4,6 +4,8 @@
     --darkerblue: rgb(0, 0, 79);
 }
 
+
+
 .hidden {
     display: none;
 }
@@ -15,6 +17,7 @@ body {
     background-attachment: fixed;
     font-size: 18px;
     margin: 0;
+    box-sizing: border-box;
 }
 
 .modal{
@@ -41,6 +44,18 @@ h1 {
 
 .timeInputBox {
     width: 25px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 #messageBox {
@@ -110,18 +125,17 @@ h1 {
     border: 0 !important;
 }
 
-#paceModal {
+.paceBox {
     width: 100%;
-    background-color: lavender;
-    position: fixed;
-    top: 0;
-    left: 0;
+    background-image: linear-gradient(to bottom, rgb(78, 78, 78), rgb(189, 189, 189));
     text-align: center;
+    padding-bottom: 20px;
 }
 
 .paceBlock {
     width: 100%;
     padding: 5px;
+    box-sizing: border-box;
 }
 
 #easyPace {
@@ -154,6 +168,16 @@ h1 {
     color: white;
 }
 
+#footerContent {
+    width: 100%;
+    padding-bottom: 5px;
+    text-align: center;
+    font-size: 0.5rem;
+    font-weight: 500;
+    position: absolute;
+    bottom: 0;
+}
+
 @media screen and (min-width: 478px) {
     .modal{
         width: 400px;
@@ -164,6 +188,11 @@ h1 {
     h1 {
         border-top-left-radius: 15px;
         border-top-right-radius: 15px;
+    }
+
+    .buttonStyle:hover {
+        background-color: powderblue;
+        color: black;
     }
 }
 
