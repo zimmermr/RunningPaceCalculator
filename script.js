@@ -4,8 +4,16 @@ const ss = document.getElementById('prevRaceTimeSS');
 const msg = document.getElementById('messageBox');
 const btnCalc = document.getElementById('btnCalc');
 const btnReset = document.getElementById('btnReset');
+const btnReturn = document.getElementById('btnHidePace');
+const paceModalElement = document.getElementById('paceModal');
 const fullForm = document.getElementById('previousTime');
 const raceDist = document.getElementById('prevRaceDist');
+const easyPaceElement = document.getElementById('easyPace');
+const marathonPaceElement = document.getElementById('marathonPace');
+const halfPaceElement = document.getElementById('halfMarathonPace');
+const tempoPaceElement = document.getElementById('tempoPace');
+const longIntPaceElement = document.getElementById('longIntPace');
+const shortIntPaceElement = document.getElementById('shortIntPace');
 
 let timeInSeconds = 0;
 let hours, minutes, seconds, vMax;
@@ -15,26 +23,23 @@ let easyPaceFast, easyPaceSlow, marPaceFast, marPaceSlow, halfPaceFast, halfPace
 
 btnCalc.addEventListener('click', calculate);
 btnReset.addEventListener('click', clear);
+btnReturn.addEventListener('click', closePaces)
 
 function calculate() {
   getNumbersFromInputs();
   if (checkTimeInputs()) {
+    console.log(easyPaceElement);
     convertToSeconds(hours, minutes, seconds);
-    console.log('velocity: ' + getVelocity());
-    console.log('VO2: ' + getvo2(getVelocity()));
     vMax = getvo2Max(timeInSeconds);
-    console.log('VO2Max: ' + getvo2Max(timeInSeconds));
     setPaces();
-    console.log('Easy fast: ' + easyPaceFast);
-    msg.textContent = '';
-    addMessage(`Your time in seconds is ${timeInSeconds}`);
-    addMessage(`\nConverted to time format: ${convertToTimeFormat(timeInSeconds)}`)
-    addMessage(`\nEasy/Long Run Pace: ` + `\n${convertToTimeFormat(easyPaceFast)}-${convertToTimeFormat(easyPaceSlow)}`);
-    addMessage(`\nMarathon Pace: ` + `${convertToTimeFormat(marPaceFast)}-${convertToTimeFormat(marPaceSlow)}`);
-    addMessage(`\nHalf Marathon Pace: ` + `\n${convertToTimeFormat(halfPaceFast)}-${convertToTimeFormat(halfPaceSlow)}`);
-    addMessage(`\nTempo Pace: ` + `\n${convertToTimeFormat(tempoPaceFast)}-${convertToTimeFormat(tempoPaceSlow)}`);
-    addMessage(`\nLong Interval (800m+) Pace: ` + `\n${convertToTimeFormat(longIntPaceFast)}-${convertToTimeFormat(longIntPaceSlow)}`);
-    addMessage(`\nShort Interval (<800m) Pace: ` + `\n${convertToTimeFormat(shortIntPaceFast)}-${convertToTimeFormat(shortIntPaceSlow)}`);
+    easyPaceElement.innerHTML = `Easy/Long Run Pace:<br />${convertToTimeFormat(easyPaceFast)}-${convertToTimeFormat(easyPaceSlow)} min/mile`;
+    marathonPaceElement.innerHTML = `Marathon Pace:<br />${convertToTimeFormat(marPaceFast)}-${convertToTimeFormat(marPaceSlow)} min/mile`;
+    halfPaceElement.innerHTML = `Half Marathon Pace:<br />${convertToTimeFormat(halfPaceFast)}-${convertToTimeFormat(halfPaceSlow)} min/mile`;
+    tempoPaceElement.innerHTML = `Tempo Run Pace:<br />${convertToTimeFormat(tempoPaceFast)}-${convertToTimeFormat(tempoPaceSlow)} min/mile`;
+    longIntPaceElement.innerHTML = `Long Interval (800m+) Pace:<br />${convertToTimeFormat(longIntPaceFast)}-${convertToTimeFormat(longIntPaceSlow)} min/mile`;
+    shortIntPaceElement.innerHTML = `Short Interval (<800m) Pace:<br />${convertToTimeFormat(shortIntPaceFast)}-${convertToTimeFormat(shortIntPaceSlow)} min/mile`;
+
+    paceModalElement.classList.remove('hidden');
   }
 }
 
@@ -164,6 +169,10 @@ function getPaceFromVo2(vo2) {
   let tempVelocity = 29.54 + (5.000663 * vo2) - (0.007546 * (vo2 ** 2));
   let paceMinutes = 1609.344 / tempVelocity;
   return paceMinutes;
+}
+
+function closePaces() {
+  paceModalElement.classList.add('hidden');
 }
 
 function addMessage(message) {

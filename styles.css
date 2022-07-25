@@ -110,6 +110,50 @@ h1 {
     border: 0 !important;
 }
 
+#paceModal {
+    width: 100%;
+    background-color: lavender;
+    position: fixed;
+    top: 0;
+    left: 0;
+    text-align: center;
+}
+
+.paceBlock {
+    width: 100%;
+    padding: 5px;
+}
+
+#easyPace {
+    background-color: blue;
+    color: white;
+}
+
+#marathonPace {
+    background-color: rgb(0, 167, 69);
+    color: black;
+}
+
+#halfMarathonPace {
+    background-color: rgb(238, 238, 0);
+    color: black;
+}
+
+#tempoPace {
+    background-color: rgb(238, 186, 0);
+    color: black;
+}
+
+#longIntPace {
+    background-color: rgb(238, 115, 0);
+    color: white;
+}
+
+#shortIntPace {
+    background-color: rgb(238, 0, 0);
+    color: white;
+}
+
 @media screen and (min-width: 478px) {
     .modal{
         width: 400px;
